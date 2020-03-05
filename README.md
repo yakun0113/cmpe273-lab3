@@ -2,21 +2,31 @@
 
 ## Pre-requisites
 
-* Install _Ariadne_
+* Install Pipenv
 
 ```
-pip install ariadne
+pip install pipenv
 ```
 
-* Install _unicorn_
+* Install Flask
 
 ```
-pipenv install unicorn
+pipenv install flask==1.1.1
 ```
-* Create the app.py .
+* Create the app.py.
 
-* Finally run the server.
+* run the app.py from a shell/terminal
 
+  ```
+pipenv shell
+env FLASK_APP=app.py flask run
+  ```
+* Open this URL in a web browser or run this CLI to see the output
+```
+curl -i http://127.0.0.1:5000/graphql
+```
+
+## Test & Output
 
 * Mutate a new student
 
@@ -58,6 +68,14 @@ mutation{
 }
 ```
 
+* Add students to a class
+
+```
+mutation{
+  enroll(sid:1238125, cid:1122334)
+}
+```
+
 * Query a class
 
 ```
@@ -73,13 +91,24 @@ mutation{
 }
 ```
 
-* Add students to a class
+_Response_
 
 ```
-mutation{
-  enroll(sid:1238125, cid:1122334)
+{
+  "data": {
+    "classes": {
+      "name": "CMPE273",
+      "studentinfo": [
+        {
+          "id": 1238125,
+          "name": "Bob Smith"
+        }
+      ]
+    }
+  }
 }
 ```
+
 
 
 
